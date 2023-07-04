@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Receipt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
+    <!-- <img src="static/img/H20Express-logos.jpeg" alt="Logo" class="logo-image w-24 h-auto"> -->
+    <style>
+        /* Add any additional custom CSS styles for the receipt here */
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold mb-4">Purchase Receipt</h1>
+
+        <p class="mb-4">Thank you for your purchase!</p>
+
+        <table class="w-full border-collapse">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border">Purchase ID</th>
+                    <th class="py-2 px-4 border">Date</th>
+                    <th class="py-2 px-4 border">Amount Paid</th>
+                    <th class="py-2 px-4 border">Token</th>
+                    <th class="py-2 px-4 border">VAT</th>
+                    <th class="py-2 px-4 border">Total Value</th>
+                    <th class="py-2 px-4 border">Tax Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="py-2 px-4 border">{{ purchase.id }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.purchase_date }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.amount_paid }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.token }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.vat|floatformat:2 }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.total_value|floatformat:2 }}</td>
+                    <td class="py-2 px-4 border">{{ purchase.tax_total|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="mt-4">If you have any questions, please contact our customer support.</p>
+        <p class="mt-4">Our customer service line is open 24/7. Here are the contact details:</p>
+        <ul class="list-disc ml-8 mt-2">
+            <li>Phone: 123-456-7890</li>
+            <li>Email: customerservice@H20Express.com</li>
+        </ul>
+
+        <p class="mt-4">Thank you for choosing H20Express!</p>
+
+        <!-- Include any additional information or branding you want in the receipt -->
+    </div>
+</body>
+</html>
