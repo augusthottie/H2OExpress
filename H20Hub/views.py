@@ -81,9 +81,9 @@ class PurchaseWaterView(View):
                     amount_paid=amount_paid,
                     units_purchased=units_purchased,
                     token=token,
-                    vat=Decimal(0.14) * Decimal(amount_paid),  # Convert to Decimal before calculation
-                    total_value=Decimal(amount_paid) * Decimal(1.14),  # Convert to Decimal before calculation
-                    tax_total=Decimal(0.14) * Decimal(amount_paid),  # Convert to Decimal before calculation
+                    vat=Decimal(0.15) * Decimal(amount_paid),  # Convert to Decimal before calculation
+                    total_value=Decimal(amount_paid) * Decimal(1.15),  # Convert to Decimal before calculation
+                    tax_total=Decimal(0.15) * Decimal(amount_paid),  # Convert to Decimal before calculation
                 )
 
                 water_purchase.save()
