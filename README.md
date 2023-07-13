@@ -14,8 +14,7 @@ H20Express is an innovative Django application that allows users to purchase wat
 1. Clone the repository:
 
    ```shell
-   git clone https://github.com/AugustHottie/h20express.git
-
+   git clone https://github.com/AugustHottie/H2OExpress.git
 2. Install the project dependencies
    ```shell
    pip install requirements.txt
