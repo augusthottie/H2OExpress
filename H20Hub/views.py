@@ -16,9 +16,8 @@ from django.views import View
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from weasyprint import HTML
 import braintree
-from braintree import Transaction
+
 # Configure Braintree
 gateway = braintree.BraintreeGateway(
 braintree.Configuration.configure(
@@ -58,10 +57,10 @@ def generate_token():
     return token
 
 
-def generate_pdf_from_html(html_content, water_purchase):
-    water_purchase.vat = water_purchase.vat.quantize(Decimal('0.00'))
-    pdf = HTML(string=html_content).write_pdf()
-    return pdf
+# def generate_pdf_from_html(html_content, water_purchase):
+#     water_purchase.vat = water_purchase.vat.quantize(Decimal('0.00'))
+#     pdf = HTML(string=html_content).write_pdf()
+#     return pdf
 
 class PurchaseWaterView(View):
     def get(self, request):
@@ -152,88 +151,6 @@ class PurchaseWaterView(View):
                 return HttpResponse(error_message)
 
         return render(request, 'purchase_water.html', {'form': form})
-
-# # class PurchaseWaterView(View):
-#     def get(self, request):
-#         form = WaterPurchaseForm()
-#         request.session['braintree_client_token'] = braintree.ClientToken.generate()
-#         return render(request, 'purchase_water.html', {'form': form})
-
-#     def post(self, request):
-#         form = WaterPurchaseForm(request.POST)
-#         if form.is_valid():
-#             amount_paid = form.cleaned_data['amount_paid']
-#             user = request.user
-
-#             units_purchased = amount_paid * Decimal(23.5) 
-#             # Calculate total amount
-#             vat = Decimal(0.15) * amount_paid
-#             total_amount = amount_paid + vat
-
-#               # Round the total amount to 2 decimal places
-#             total_amount = total_amount.quantize(Decimal('0.00'))
-            
-#             # Convert total amount to string and remove whitespace
-#             total_amount_str = str(total_amount).strip()
-#             print(f"Total Amount: {total_amount_str}")
-
-
-#             # Generate token
-#             token = generate_token()
-
-#             try:
-#                 result = braintree.Transaction.sale({
-#                     'amount': total_amount_str,
-#                     'payment_method_nonce': request.POST['payment_method_nonce'],
-#                     'options': {
-#                         'submit_for_settlement': True
-#                     }
-#                 })
-
-#                 if result.is_success:
-#                     water_purchase = WaterPurchase(
-#                         user=user,
-#                         meter_number=user.meter_number,
-#                         purchase_date=timezone.localtime(),
-#                         amount_paid=amount_paid,
-#                         units_purchased=units_purchased,
-#                         token=token,
-#                         vat=Decimal(0.15) * Decimal(amount_paid),
-#                         total_value=Decimal(amount_paid) * Decimal(1.15),
-#                         tax_total=Decimal(0.15) * Decimal(amount_paid),
-#                     )
-#                     water_purchase.save()
-#                     braintree_transaction_id = result.transaction.id
-
-#                     # Generate HTML content for the receipt
-#                     template = get_template('receipt.html')
-#                     context = {'purchase': water_purchase}
-#                     html_content = template.render(context)
-
-#                     # Generate PDF receipt
-#                     pdf = generate_pdf_from_html(html_content, water_purchase)
-
-#                     response = HttpResponse(content_type='application/pdf')
-#                     response['Content-Disposition'] = 'filename="receipt.pdf"'
-#                     response.write(pdf)
-
-#                     return response
-
-#                 else:
-#                     error_message = f"Transaction failed: {result.message}"
-#                     return HttpResponse(error_message)
-
-#             except Exception as e:
-#                 # Log the exception details for debugging
-#                 import traceback
-#                 traceback.print_exc()
-
-#                 # Display a more informative error message to the user
-#                 error_message = f"An error occurred while processing your purchase: {str(e)}"
-#                 return HttpResponse(error_message)
-
-#         return render(request, 'purchase_water.html', {'form': form})
-
 
 def receipt(request):
     user = request.user
