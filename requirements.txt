@@ -19,6 +19,5 @@ sqlparse==0.4.4
 tinycss2==1.2.1
 tzdata==2023.3
 urllib3==2.0.3
-weasyprint==59.0
 webencodings==0.5.1
 zopfli==0.2.2
