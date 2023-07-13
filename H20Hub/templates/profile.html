@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 {% block content %}
     <div class="bg-white shadow p-8">
@@ -13,11 +14,32 @@
 
         <h2 class="text-2xl mt-8 mb-4">Water Purchases</h2>
         {% if purchases %}
-            <ul class="list-disc ml-8">
-                {% for purchase in purchases %}
-                    <li class="mb-2">Water purchase #{{ purchase.id }} - Units Purchased: {{ purchase.units_purchased }}, Amount Paid: ${{ purchase.amount_paid }}</li>
-                {% endfor %}
-            </ul>
+            <table class="border-collapse border border-gray-300 mt-4">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2">Transaction ID</th>
+                        <th class="border border-gray-300 px-4 py-2">Transaction Date</th>
+                        <th class="border border-gray-300 px-4 py-2">Units Purchased</th>
+                        <th class="border border-gray-300 px-4 py-2">Amount Paid</th>
+                        <th class="border border-gray-300 px-4 py-2">Token</th>
+                        <th class="border border-gray-300 px-4 py-2">Tax</th>
+                        <th class="border border-gray-300 px-4 py-2">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase in purchases %}
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ purchase.id }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ purchase.purchase_date|timezone:"Africa/Johannesburg" }}</td>
+                            <td class="border border-gray-300 px-4 py-2">KL {{ purchase.units_purchased }}</td>
+                            <td class="border border-gray-300 px-4 py-2">R{{ purchase.amount_paid }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ purchase.token}}</td>
+                            <td class="border border-gray-300 px-4 py-2">R{{ purchase.vat }}</td>
+                            <td class="border border-gray-300 px-4 py-2">R{{ purchase.total_value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% else %}
             <p>No water purchases yet.</p>
         {% endif %}
