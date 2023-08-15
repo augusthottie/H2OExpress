@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'H20Express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'h2oexpress', 
+        'NAME': 'h20express', 
         'USER': 'postgres',
         'PASSWORD': 'Chioma@23',
         'HOST': '127.0.0.1', 
