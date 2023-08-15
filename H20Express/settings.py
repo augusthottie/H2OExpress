@@ -97,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'h2oexpress', 
         'USER': 'augusthottie',
-        'PASSWORD': '6:jYefyfNwsA-eC',
+        'PASSWORD': 'Chioma@23',
         'HOST': '127.0.0.1', 
         'PORT': '5432',
     }
