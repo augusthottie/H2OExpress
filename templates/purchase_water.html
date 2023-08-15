@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-4">Purchase Water</h1>
+    
+    <form id="payment-form" method="post">
+      {% csrf_token %}
+      
+      {{ form.as_p }}
+      
+      <!-- Braintree Drop-in UI container -->
+      <div id="dropin-container"></div>
+      
+      <!-- Error message container -->
+      <div id="payment-error" class="text-red-500 mt-2"></div>
+
+      <!-- Hidden input field for payment method nonce -->
+  <input type="hidden" id="payment_method_nonce" name="payment_method_nonce">
+      
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Purchase</button>
+    </form>
+    
+    <script src="https://js.braintreegateway.com/web/dropin/1.31.0/js/dropin.min.js"></script>
+<script>
+  var clientToken = "{{ request.session.braintree_client_token }}";
+
+  braintree.dropin.create({
+    authorization: clientToken,
+    container: '#dropin-container',
+    card: {
+      cardholderName: {
+        required: true
+      }
+    }
+  }, function (createErr, instance) {
+    if (createErr) {
+      console.error(createErr);
+      return;
+    }
+
+    var form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      instance.requestPaymentMethod(function (err, payload) {
+        if (err) {
+          console.error(err);
+          document.getElementById('payment-error').textContent = err.message;
+          return;
+        }
+
+        // Set the payment_method_nonce input field value
+        document.getElementById('payment_method_nonce').value = payload.nonce;
+
+        // Disable the submit button
+        form.querySelector('button[type="submit"]').disabled = true;
+
+        // Submit the form
+        form.submit();
+      });
+    });
+  });
+</script>
+  </div>
+{% endblock %}

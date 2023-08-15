@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+            <div>
+                <h1 class="text-3xl font-bold mb-4">Welcome to H20Express!</h1>
+                <p>Start purchasing water online for your household with ease.</p>
+                <p>H20Express is the innovative Django application that lets you purchase water for your household online, just as easily as buying electricity.</p>
+
+                <div class="mt-8">
+                    <h2 class="text-2xl font-bold mb-4">How It Works</h2>
+                    <ul class="list-disc list-inside">
+                        <li class="text-lg">Create an account by providing your username, email, meter number, name, address, phone number, and password.</li>
+                        <li class="text-lg">Purchase water by choosing your desired amount and selecting the payment method. Your account will be updated with your purchase history.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bg-blue-200 h-4 m-8">
+                                                                                                
+                                                                                                
+            </div> <!-- Horizontal spacing with blue background -->
+            <div class="flex justify-center">
+                <div class="flex justify-between">
+                    <div class="p-4">
+                        <img src="{% static 'img/rain.png' %}" alt="Logo" class="image w-144 h-auto">
+                        <h2 class="text-lg ">Enjoy the convenience of online water purchasing and never worry about running out of water again.</h2>
+                    </div>
+                    <div class="p-4">
+                        <img src="{% static 'img/lady.png' %}" alt="Logo" class="image w-144 h-auto">
+                        <h2 class="text-lg ">Create your H20Express profile and easily track your water usage, purchases, and more.</h2>
+                    </div>
+                    <div class="p-4">
+                        <img src="{% static 'img/tap.png' %}" alt="Logo" class="image w-144 h-auto">
+                        <h2 class="text-lg inline-block">Efficiently manage your household’s water supply with our easy-to-use platform and responsive 
+                            customer support.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more content as needed -->
+    </div>
+{% endblock %}
