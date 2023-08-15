@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure--n&ar7oj5^j0s6a8t39gqovom3e2z1)b3vnhfsr#)u2%1n!j11
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.234.53.158', 'localhost']
+ALLOWED_HOSTS = ['3.234.53.158', 'localhost', '127.0.0.1','172.31.3.10']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'PASSWORD': '6:jYefyfNwsA-eC',
         'HOST': 'h2oexpress.cpapyg59ywqm.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
 
