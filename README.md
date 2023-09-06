@@ -51,8 +51,7 @@ H20Express is an innovative Django application that allows users to purchase wat
 6.  Start the Django development server: Run the manage.py runserver command to start the Django development server.
 
 ### View live site here;
-- http://3.234.53.158/
-
+- https://h20express.pythonanywhere.com
   
 Please note that the above steps assume you have the necessary AWS credentials and access rights to create S3 buckets and RDS instances. Refer to the official AWS documentation for more detailed instructions on setting up AWS S3 and AWS RDS. Similarly, refer to the Braintree documentation for guidance on obtaining API credentials and integrating Braintree with your Django application.
 
