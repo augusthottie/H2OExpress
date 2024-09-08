@@ -5,7 +5,8 @@ import string
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
-
+import os
+from django.conf import settings
 from H20Express import settings
 from .models import Meter, TransactionHistory, WaterPurchase
 from .forms import WaterPurchaseForm
@@ -18,14 +19,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import braintree
 
-# Configure Braintree
 gateway = braintree.BraintreeGateway(
-braintree.Configuration.configure(
-    braintree.Environment.Sandbox, 
-    merchant_id='7x8b8qk6qykgxbhw',
-    public_key='j7yfgxr46ryrjbxn',
-    private_key='47a88793d6a52f8ac4c1ff56338e1532'
-)
+    braintree.Configuration.configure(
+        braintree.Environment.Sandbox,
+        merchant_id=os.getenv('BRAINTREE_MERCHANT_ID'),
+        public_key=os.getenv('BRAINTREE_PUBLIC_KEY'),
+        private_key=os.getenv('BRAINTREE_PRIVATE_KEY')
+    )
 )
 
 class HomeView(View):
