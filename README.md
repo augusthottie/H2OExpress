@@ -1,62 +1,114 @@
 # H2OExpress
 
-H20Express is an innovative Django application that allows users to purchase water for their household online, providing a convenient and easy-to-use platform.
+**H2OExpress** is a Django web application that allows users to conveniently purchase household water online. The platform is designed to simplify water delivery by providing an easy-to-use interface for making purchases, managing profiles, and tracking transactions.
 
 ## Features
 
-- User Registration: Users can create an account by providing their username, email, meter number, name, address, phone number, and password.
-- Water Purchase: Users can select their desired amount of water and choose a payment method to complete the purchase.
-- Transaction History: The application tracks user's purchase history, providing a record of purchased water, units, and payment details.
-- Profile Management: Users can update their profile information, including meter number, address, and phone number.
+- **User Registration**: Sign up by providing your username, email, meter number, name, address, phone number, and password.
+- **Water Purchase**: Choose your desired quantity of water and complete the purchase through secure payment options.
+- **Transaction History**: View a detailed history of past water purchases, including units bought, transaction details, and payment methods.
+- **Profile Management**: Update personal information such as meter number, address, and phone number.
 
 ## Installation
 
 1. Clone the repository:
 
-   ```shell
+   ```bash
    git clone https://github.com/AugustHottie/H2OExpress.git
-2. Install the project dependencies
-   ```shell
-   pip install requirements.txt
+   ```
 
-3. Run database migrations:
-   ```shell
+2. Install the project dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the database migrations:
+
+   ```bash
    python manage.py migrate
-   
+   ```
+
 4. Start the development server:
-   ```shell
+
+   ```bash
    python manage.py runserver
+   ```
 
 ## Technologies Used
-- Python
-- Django
-- HTML/CSS/Tailwind
-- JavaScript
-- AWS RDS: Managed PostgreSQL database service
-- AWS S3: Storage service for static files
-- Braintree: Payment processing service
 
-## Deployment 
-### The application is deployed using the following services:
-- AWS S3: Static files (CSS, JavaScript, images, etc.) are stored and served from AWS S3. This ensures efficient delivery and scalability of the static assets.
-- AWS RDS: The database for this application is hosted on AWS RDS, which is a managed PostgreSQL database service. It provides reliable and scalable database infrastructure without the need for manual administration.
-- Braintree: Payment processing is handled by Braintree, a popular and secure payment gateway. It enables the application to securely process credit card transactions and manage customer payments.
+- **Python** & **Django**
+- **HTML**, **CSS** (Tailwind), **JavaScript**
+- **AWS RDS**: Managed PostgreSQL database
+- **AWS S3**: Static file storage
+- **Braintree**: Secure payment processing
 
-### To deploy the application in your own environment, you will need to perform the following steps:
-1. Set up AWS S3: Create an S3 bucket to store your static files. Update the AWS S3 configuration in the Django settings file (settings.py) with your bucket name, access key, and secret access key.
-2.  Set up AWS RDS: Create an RDS PostgreSQL database instance. Update the database configuration in the Django settings file (settings.py) with your RDS endpoint, database name, username, and password.
-3.  Set up Braintree: Sign up for a Braintree account and obtain your Braintree API credentials (merchant ID, public key, private key). Update the payment configuration in the Django settings file (settings.py) with your Braintree API credentials.
-4.  Migrate the database: Run the Django database migration commands to apply the database schema and create the necessary tables.
-5.  Collect static files: Use the collectstatic management command to gather all the static files and upload them to your AWS S3 bucket.
-6.  Start the Django development server: Run the manage.py runserver command to start the Django development server.
+## Deployment
 
-### View live site here;
-- https://h20express.pythonanywhere.com
-  
-Please note that the above steps assume you have the necessary AWS credentials and access rights to create S3 buckets and RDS instances. Refer to the official AWS documentation for more detailed instructions on setting up AWS S3 and AWS RDS. Similarly, refer to the Braintree documentation for guidance on obtaining API credentials and integrating Braintree with your Django application.
+H2OExpress is deployed using the following services:
+
+- **AWS S3**: For serving static assets (CSS, JavaScript, images), ensuring scalability and fast delivery.
+- **AWS RDS**: A managed PostgreSQL database for reliable and scalable data management.
+- **Braintree**: Handles secure payment processing for water purchases via credit card transactions.
+
+### Deployment Steps
+
+To deploy the application in your environment, follow these steps:
+
+1. **AWS S3 Setup**:
+   - Create an S3 bucket for static files.
+   - Update `settings.py` with your AWS S3 bucket name, access key, and secret access key.
+
+2. **AWS RDS Setup**:
+   - Create an RDS PostgreSQL instance.
+   - Update the database configuration in `settings.py` with the RDS endpoint, database name, username, and password.
+
+3. **Braintree Setup**:
+   - Sign up for a Braintree account.
+   - Update `settings.py` with your Braintree merchant ID, public key, and private key.
+
+4. **Migrate the Database**:
+   - Run Django migration commands to apply the database schema.
+
+5. **Collect Static Files**:
+   - Use `collectstatic` to gather all static files and upload them to AWS S3.
+
+6. **Run the Server**:
+   - Use `manage.py runserver` to start the Django server.
+
+### Live Demo
+
+Check out the live application [here](https://h20express.pythonanywhere.com).
+
+### Payment Testing
+
+To test the payment functionality using Braintree, use the following test credit card numbers:
+
+- **Visa**: 4111 1111 1111 1111
+- **Mastercard**: 5555 5555 5555 4444
+
+### Docker Deployment
+
+To deploy with Docker:
+
+1. Build the Docker image:
+
+   ```bash
+   docker build -t <image-name> .
+   ```
+
+2. Run Docker Compose:
+
+   ```bash
+   docker-compose build && docker-compose up
+   ```
+
+Ensure you have the necessary AWS credentials to access S3 and RDS. Refer to the [AWS documentation](https://docs.aws.amazon.com/) for guidance on setting up these services and [Braintree documentation](https://support.checkfront.com/hc/en-us/articles/115004847353-Setting-up-Braintree-Direct-as-your-Checkfront-payment-provider) for API credentials setup.
 
 ## Contributing
-Contributions to H2OExpress are welcome! If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
+
+Contributions are welcome! If you encounter a bug or have suggestions for improvement, feel free to open an issue or submit a pull request.
 
 ## License
+
 This project is licensed under the MIT License.
