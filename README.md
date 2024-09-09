@@ -16,6 +16,11 @@
    ```bash
    git clone https://github.com/AugustHottie/H2OExpress.git
    ```
+2. Create Virtual environment
+   ```
+   python3 -m venv 'name-of-env'
+   source 'name-of-env/bin/activate
+   ```
 
 2. Install the project dependencies:
 
