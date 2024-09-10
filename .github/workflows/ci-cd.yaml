@@ -20,6 +20,8 @@ jobs:
       run: |
         pip install autopep8
         autopep8 --in-place --aggressive --aggressive -r .
+    - name: Run linter
+      run: flake8 .
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -31,9 +33,6 @@ jobs:
       run: |
           docker save h2oexpress > h2oexpress.tar
           gzip h2oexpress.tar
-    - name: Run linter
-      run: flake8 .
-
     - name: Copy to server
       uses: appleboy/scp-action@master
       with:
@@ -69,4 +68,4 @@ jobs:
           script: |
             cd H2OExpress
             git pull origin main
-            docker-compose up -d --build
+            docker-compose up -d
