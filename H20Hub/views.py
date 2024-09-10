@@ -28,10 +28,12 @@ gateway = braintree.BraintreeGateway(
     )
 )
 
+
 class HomeView(View):
     def get(self, request):
         return render(request, 'home.html')
-    
+
+
 @login_required
 def user_profile_view(request):
     user = request.user
@@ -74,7 +76,7 @@ class PurchaseWaterView(View):
             amount_paid = form.cleaned_data['amount_paid']
             user = request.user
 
-            units_purchased = amount_paid * Decimal(23.5) 
+            units_purchased = amount_paid * Decimal(23.5)
 
             # Calculate tax amount
             tax_rate = Decimal(0.15)
@@ -119,7 +121,8 @@ class PurchaseWaterView(View):
                     water_purchase.save()
                     braintree_transaction_id = result.transaction.id
 
-                    # Save the transaction details to the TransactionHistory model
+                    # Save the transaction details to the TransactionHistory
+                    # model
                     transaction_history = TransactionHistory(
                         user=user,
                         purchase_id=water_purchase.id,
@@ -132,10 +135,13 @@ class PurchaseWaterView(View):
                     )
                     transaction_history.save()
                     # Retrieve the user's transaction history
-                    transaction_history = WaterPurchase.objects.filter(user=user)
+                    transaction_history = WaterPurchase.objects.filter(
+                        user=user)
 
                     # Redirect to the profile page with transaction history
-                    return render(request, 'profile.html', {'purchases': transaction_history})
+                    return render(
+                        request, 'profile.html', {
+                            'purchases': transaction_history})
 
                 else:
                     error_message = f"Transaction failed: {result.message}"
@@ -147,17 +153,21 @@ class PurchaseWaterView(View):
                 traceback.print_exc()
 
                 # Display a more informative error message to the user
-                error_message = f"An error occurred while processing your purchase: {str(e)}"
+                error_message = f"An error occurred while processing your purchase: {
+                    str(e)}"
                 return HttpResponse(error_message)
 
         return render(request, 'purchase_water.html', {'form': form})
 
+
 def receipt(request):
     user = request.user
-    water_purchase = WaterPurchase.objects.filter(user=user).latest('purchase_date')
+    water_purchase = WaterPurchase.objects.filter(
+        user=user).latest('purchase_date')
     context = {'water_purchase': water_purchase}
     return render(request, 'receipt.html', context)
-    
+
+
 class LoginView(View):
     def get(self, request):
         form = AuthenticationForm()
@@ -172,7 +182,8 @@ class LoginView(View):
             messages.success(request, 'Login successful!')
             return redirect('profile')
         return render(request, 'login.html', {'form': form})
-    
+
+
 class SignupView(View):
     def get(self, request):
         form = CustomUserCreationForm()
@@ -189,16 +200,21 @@ class SignupView(View):
                 meter = Meter.objects.get(user=user)
             except Meter.DoesNotExist:
                 # If the Meter object doesn't exist, create it
-                meter = Meter(user=user, meter_number=user.meter_number, current_reading=0)
+                meter = Meter(
+                    user=user,
+                    meter_number=user.meter_number,
+                    current_reading=0)
                 meter.save()
 
             login(request, user)
-             # Add success message
-            messages.success(request, 'Signup successful! You are now logged in.')
+            # Add success message
+            messages.success(
+                request, 'Signup successful! You are now logged in.')
             return redirect('profile')
 
         return render(request, 'signup.html', {'form': form})
-    
+
+
 def logout_view(request):
     logout(request)
     # Add success message

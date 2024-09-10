@@ -1,11 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class H20User(AbstractUser):
     meter_number = models.CharField(max_length=100)
     address = models.TextField()
     phone_number = models.CharField(max_length=20)
-    amount_paid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    amount_paid = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return self.username
@@ -18,6 +20,7 @@ class Meter(models.Model):
 
     def __str__(self):
         return f"Meter #{self.meter_number}"
+
 
 class WaterPurchase(models.Model):
     user = models.ForeignKey(H20User, on_delete=models.CASCADE)
@@ -35,6 +38,7 @@ class WaterPurchase(models.Model):
         self.meter_number = self.user.meter_number
 
         super().save(*args, **kwargs)
+
 
 class TransactionHistory(models.Model):
     user = models.ForeignKey(H20User, on_delete=models.CASCADE)

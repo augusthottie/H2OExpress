@@ -10,11 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import braintree
+import os
 from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
-import os
-import braintree
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -62,7 +62,7 @@ ROOT_URLCONF = 'H20Express.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,10 +104,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'h20express', 
+#         'NAME': 'h20express',
 #         'USER': 'postgres',
 #         'PASSWORD': 'Chioma@23',
-#         'HOST': '127.0.0.1', 
+#         'HOST': '127.0.0.1',
 #         'PORT': '5432',
 #     }
 # }
@@ -149,7 +149,7 @@ USE_TZ = True
 # STATIC_URL = 'https://s3.amazonaws.com/h20express/static/'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles/" 
+STATIC_ROOT = BASE_DIR / "staticfiles/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -163,7 +163,7 @@ BRAINTREE_MERCHANT_ID = os.environ.get('BRAINTREE_MERCHANT_ID')  # Merchant ID
 BRAINTREE_PUBLIC_KEY = os.environ.get('BRAINTREE_PUBLIC_KEY')  # Public Key
 BRAINTREE_PRIVATE_KEY = os.environ.get('BRAINTREE_PRIVATE_KEY')  # Private key
 
-#S3 CONFIG
+# S3 CONFIG
 # AWS S3 Bucket
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -177,5 +177,5 @@ AWS_DEFAULT_ACL = 'public-read'
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-#env config
+# env config
 load_dotenv()
