@@ -30,7 +30,7 @@ jobs:
     - name: Save and compress Docker image
       run: |
           docker save h2oexpress > h2oexpress.tar
-          h2oexpress.tar
+          gzip h2oexpress.tar
     - name: Run linter
       run: flake8 .
 
