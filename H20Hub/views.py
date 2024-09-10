@@ -6,11 +6,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 import os
-from django.conf import settings
-from H20Express import settings
 from .models import Meter, TransactionHistory, WaterPurchase
 from .forms import WaterPurchaseForm
-from django.template.loader import get_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.views import View
@@ -153,7 +150,8 @@ class PurchaseWaterView(View):
                 traceback.print_exc()
 
                 # Display a more informative error message to the user
-                error_message = f"An error occurred while processing your purchase: {str(e)}"
+                error_message = f"An error occurred while processing your purchase: {
+                    str(e)}"
                 return HttpResponse(error_message)
 
         return render(request, 'purchase_water.html', {'form': form})
