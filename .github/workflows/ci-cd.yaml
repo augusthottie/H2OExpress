@@ -68,4 +68,4 @@ jobs:
           script: |
             cd H2OExpress
             git pull origin main
-            docker-compose up -d
+            docker-compose up -d --build
