@@ -150,8 +150,7 @@ class PurchaseWaterView(View):
                 traceback.print_exc()
 
                 # Display a more informative error message to the user
-                error_message = f"An error occurred while processing your purchase: {
-                    str(e)}"
+                error_message = f"An error occurred while processing your purchase: {str(e)}"
                 return HttpResponse(error_message)
 
         return render(request, 'purchase_water.html', {'form': form})
