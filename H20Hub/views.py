@@ -116,7 +116,7 @@ class PurchaseWaterView(View):
                         tax_total=Decimal(0.15) * Decimal(amount_paid),
                     )
                     water_purchase.save()
-                    braintree_transaction_id = result.transaction.id
+                    _ = result.transaction.id
 
                     # Save the transaction details to the TransactionHistory
                     # model
@@ -151,6 +151,7 @@ class PurchaseWaterView(View):
 
                 # Display a more informative error message to the user
                 error_message = f"An error occurred while processing your purchase: {str(e)}"
+
                 return HttpResponse(error_message)
 
         return render(request, 'purchase_water.html', {'form': form})

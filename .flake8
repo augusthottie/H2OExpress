@@ -1,0 +1,8 @@
+[flake8]
+exclude =
+    */migrations/*,
+    H20Express/settings.py
+
+ignore = E501
+
+max-line-length = 120
