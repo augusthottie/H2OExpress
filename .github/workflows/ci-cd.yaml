@@ -27,8 +27,33 @@ jobs:
         pip install flake8
     - name: Build Docker image
       run: docker build -t h2oexpress .
+    - name: Save and compress Docker image
+      run: |
+          docker save h2oexpress > h2oexpress.tar
+          h2oexpress.tar
     - name: Run linter
       run: flake8 .
+
+    - name: Copy to server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ec2-user
+        key: ${{ secrets.EC2_PRIVATE_KEY }}
+        source: "h2oexpress.tar.gz"
+        target: "/tmp"
+
+    - name: Load image in server
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ec2-user
+        key: ${{ secrets.EC2_PRIVATE_KEY }}
+        script: |
+          cd /tmp
+          gunzip h2oexpress.tar.gz
+          docker load < h2oexpress.tar
+          rm -f h2oexpress.tar
 
   deploy:
     needs: [build-and-lint]
