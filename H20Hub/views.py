@@ -10,7 +10,6 @@ from .models import Meter, TransactionHistory, WaterPurchase
 from .forms import WaterPurchaseForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
-from django.views import View
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
