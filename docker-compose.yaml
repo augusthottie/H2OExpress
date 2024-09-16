@@ -10,4 +10,5 @@ services:
     environment:
       - DEBUG=1
       - SECRET_KEY="django-insecure--n&ar7oj5^j0s6a8t39gqovom3e2z1)b3vnhfsr#)u2%1n!j11"
+    restart: always
     command: gunicorn H20Express.wsgi:application --bind 0.0.0.0:8000
