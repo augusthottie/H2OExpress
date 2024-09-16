@@ -178,3 +178,12 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # env config
 load_dotenv()
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://augusthottie.tech',
+    'https://h20express.augusthottie.tech',
+    'https://h20express.pythonanywhere.com',
+]
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
